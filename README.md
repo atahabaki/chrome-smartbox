@@ -17,3 +17,8 @@ Use it well...
 | TorrentOyun | torroyun    |
 | Yandex      | yandex      |
 | AllItEBooks | allitebooks |
+| Iconfinder  | iconfinder  |
+
+## ChangeLog
+
+* Iconfinder added for search icons...

@@ -7,7 +7,8 @@ const x = {
     "yahoo": "https://search.yahoo.com/?q=",
     "torroyun": "https://www.torrentoyunindir.com/?s=",
     "yandex": "https://yandex.com.tr/search/?text=",
-    "allitebooks": "http://www.allitebooks.org/?s="
+    "allitebooks": "http://www.allitebooks.org/?s=",
+    "iconfinder":"https://www.iconfinder.com/search/?q="
 }
 function createURL(text, query) {
     if (x[text] != undefined) {
