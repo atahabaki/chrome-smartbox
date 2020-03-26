@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
     "name": "multisearch",
-    "version": "1.0",
-    "description": "Multisearch from omnibox. Just type \"@youtube\" or something like that then see the magic",
+    "version": "2.0",
+    "description": "Multisearch from omnibox. Just type \"@\" then see the magic",
     "background": {
         "scripts": [
             "app.js"
