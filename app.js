@@ -40,7 +40,7 @@ const sites = [
         "url":"https://yandex.com/search/?text="
     },
     {
-        "name":"itebks",
+        "name":"itebx",
         "desc":"All IT e-Books",
         "url":"http://allitebooks.org/?s="
     },
@@ -53,6 +53,16 @@ const sites = [
         "name":"rddt",
         "desc":"Reddit",
         "url":"https://www.reddit.com/search/?q="
+    },
+    {
+        "name":"trrmfy",
+        "desc":"TorrentMafya",
+        "url":"https://www.torrentmafya.net/?s="
+    },
+    {
+        "name":"gthb",
+        "desc":"GitHub",
+        "url":"https://github.com/search?q="
     }
 ];
 
@@ -68,14 +78,38 @@ chrome.omnibox.onInputEntered.addListener((text, disposition) => {
     disposition = "currentTab";
     var arr, site, query;
     arr = text.split(' ');
-    if ( arr.length > 1 ) {
-        site = arr[0].toLowerCase().trim();
+    let operation = arr[0];
+    if (operation.startsWith("+")) {
+        let url = arr[arr.length - 1];
+        arr.pop();
         arr.shift();
-        query = arr.join(" ").trim();
-        var createdurl = createURL(site,query);
-        chrome.tabs.update({
-            url: createdurl
-        });
+        let name = arr.join(' ');
+        sites.push(
+            {
+                "name":`${operation.substring(1)}`,
+                "desc":name,
+                "url":url
+            }
+        );
+        console.log(sites);
+    }
+    else if (operation.startsWith("-")) {
+        for (var i = 0; i < sites.length; i++) {
+            if ( sites[i].name == operation.substring(1) ) {
+                sites.splice(i,1);
+            }
+        }
+    }
+    else {
+        if ( arr.length > 1 ) {
+            site = arr[0].toLowerCase().trim();
+            arr.shift();
+            query = arr.join(" ").trim();
+            var createdurl = createURL(site,query);
+            chrome.tabs.update({
+                url: createdurl
+            });
+        }
     }
 });
 
