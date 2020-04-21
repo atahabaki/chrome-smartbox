@@ -1,6 +1,8 @@
-# chrome-multi-searchbox
+# chrome-smartbox
 
-Just type "@" in URL bar. Then type the search engine you wanna search e.g. 'ytb', 'ggl', 'bng' etc. Then type the search string.
+`smartbox v3.0`
+
+Searching would not be much simpler. Just type "@" in URL bar. Then type the search engine you wanna search e.g. 'ytb', 'ggl', 'bng' etc. Then type the search string.
 
 Use it well...
 
@@ -37,7 +39,7 @@ search_query: search query, nothing special. Just I need to mention here it'll b
 
 ### Adding a search engine
 
-Adding search engine to multi-searchbox is simple. Please just type:
+Adding search engine to smartbox is simple. Please just type:
 
 ```
 @ +<keyword> <site_name> <url>
@@ -57,8 +59,19 @@ Removing a search engine from database as simple as adding one. Please just type
 
 keyword: is the short-name of the web site.
 
+### Listing all available search engines
+
+There're 2 options you can try to list all of them. The first one is:
+
+```
+@ ?
+```
+
+You can list just specific amount of them by typing "?".
+
+The other one is my favorite. You can quickly review what's available in comma seperated form. Try now.
+
 ## ChangeLog
 
-* TorrentMafya and GitHub added.
-* Adding and removing search engines is possible now. :D
-* General improvements...
+* Listing available search engines is now available.
+* General improvements and fixes.

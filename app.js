@@ -91,7 +91,6 @@ chrome.omnibox.onInputEntered.addListener((text, disposition) => {
                 "url":url
             }
         );
-        console.log(sites);
     }
     else if (operation.startsWith("-")) {
         for (var i = 0; i < sites.length; i++) {
@@ -113,17 +112,42 @@ chrome.omnibox.onInputEntered.addListener((text, disposition) => {
     }
 });
 
+function rawSuggest(site, query) {
+    return [
+        { content: `${site}/${query}`, description: `Search on ${site} for ${query}` },
+        { content: `${site}.com/${query}`, description: `Search on ${site}.com/ for ${query}` },
+        { content: `${site}.net/${query}`, description: `Search on ${site}.net/ for ${query}` },
+        { content: `${site}.org/${query}`, description: `Search on ${site}.org/ for ${query}` },
+    ];
+}
+
 chrome.omnibox.onInputChanged.addListener((text, suggest) => {
-    if ( text.trim().length == 0 ) {
+    text = text.trim();
+    if ( text == "." ) {
+        let suggestions = [];
         sites.forEach(e => {
-            suggest(
-                [
-                    {
-                        content: `${e.url}`, description: `Search on ${e.name} (${e.desc})`
-                    }
-                ]
-            );
+            let temp = {
+                content: `${e.url}`, description: `Search on ${e.name} (${e.desc})`
+            };
+            suggestions.push(temp);
         });
+        suggest(suggestions);
+    }
+    else if ( text == "?" ) {
+        let content = "";
+        for (let i=0; i < sites.length; i++) {
+            if ( i == sites.length - 1) {
+                content += sites[i].name;
+            }
+            else content += `${sites[i].name}, `;
+        }
+        suggest(
+            [
+                {
+                    content: content, description: content
+                }
+            ]
+        );
     }
     else {
         var arr, site, query;
@@ -133,34 +157,23 @@ chrome.omnibox.onInputChanged.addListener((text, suggest) => {
             arr.shift();
             query = arr.join(" ").trim();
 
+            let suggestions = [];
+
             sites.forEach(e => {
-                if ( e.name === site ) {
-                    suggest(
-                        [
-                            {
-                                content: `${e.url}${query}`, description: `Search for ${query} on ${e.desc}`
-                            }
-                        ]
-                    );
-                }
-                else if ( e.name.includes(site) ) {
-                    suggest(
-                        [
-                            {
-                                content: `${e.url}${query}`, description: `Search for ${query} on ${e.desc}`
-                            }
-                        ]
-                    );
+                let temp = {
+                    content: "",
+                    description: ""
+                };
+                if (e.name === site || e.name.includes(site)) {
+                    temp.content = `${e.url}${query}`;
+                    temp.description = `Search for ${query} on ${e.desc}`;
+                    suggestions.push(temp);
                 }
                 else {
-                    suggest([
-                        { content: `${site}/${query}`, description: `Search on ${site} for ${query}` },
-                        { content: `${site}.com/${query}`, description: `Search on ${site}.com/ for ${query}` },
-                        { content: `${site}.net/${query}`, description: `Search on ${site}.net/ for ${query}` },
-                        { content: `${site}.org/${query}`, description: `Search on ${site}.org/ for ${query}` },
-                    ]);
+                    rawSuggest(site,query).forEach(e=>suggestions.push(e));
                 }
             });
+            suggest(suggestions);
         }
     }
 });
