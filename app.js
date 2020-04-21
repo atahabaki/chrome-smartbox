@@ -1,70 +1,19 @@
-const sites = [
-    {
-        "name":"ytb",
-        "desc":"YouTube",
-        "url":"https://www.youtube.com/results?search_query="
-    },
-    {
-        "name":"ggl",
-        "desc":"Google",
-        "url":"https://www.google.com/search?q="
-    },
-    {
-        "name":"bng",
-        "desc":"Bing",
-        "url":"https://www.bing.com/search?q="
-    },
-    {
-        "name":"dckgo",
-        "desc":"DuckDuckGo",
-        "url":"https://duckduckgo.com/?q="
-    },
-    {
-        "name":"sszlk",
-        "desc":"SesliSözlük",
-        "url":"https://seslisozluk.net/"
-    },
-    {
-        "name":"yaho",
-        "desc":"Yahoo",
-        "url":"https://search.yahoo.com/?q="
-    },
-    {
-        "name":"trryn",
-        "desc":"Torrent Oyun İndir",
-        "url":"https://www.torrentoyunindir.com/?s="
-    },
-    {
-        "name":"ydex",
-        "desc":"Yandex",
-        "url":"https://yandex.com/search/?text="
-    },
-    {
-        "name":"itebx",
-        "desc":"All IT e-Books",
-        "url":"http://allitebooks.org/?s="
-    },
-    {
-        "name":"iconf",
-        "desc":"IconFinder",
-        "url":"https://www.iconfinder.com/search/?q="
-    },
-    {
-        "name":"rddt",
-        "desc":"Reddit",
-        "url":"https://www.reddit.com/search/?q="
-    },
-    {
-        "name":"trrmfy",
-        "desc":"TorrentMafya",
-        "url":"https://www.torrentmafya.net/?s="
-    },
-    {
-        "name":"gthb",
-        "desc":"GitHub",
-        "url":"https://github.com/search?q="
+var sites = [];
+
+function loadSites() {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+            console.log("It's ready!..");
+            sites = JSON.parse(xhr.response);
+            console.log(sites);
+        }
     }
-];
+    xhr.open("GET",chrome.extension.getURL("/sites.json"));
+    xhr.send();
+}
+
+loadSites();
 
 function createURL(site,query) {
     for (var i = 0; i < sites.length; i++) {
@@ -79,6 +28,7 @@ chrome.omnibox.onInputEntered.addListener((text, disposition) => {
     var arr, site, query;
     arr = text.split(' ');
     let operation = arr[0];
+    console.log(sites);
     if (operation.startsWith("+")) {
         let url = arr[arr.length - 1];
         arr.pop();
