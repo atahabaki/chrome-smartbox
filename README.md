@@ -69,7 +69,13 @@ There're 2 options you can try to list all of them. The first one is:
 
 You can list just specific amount of them by typing "?".
 
-The other one is my favorite. You can quickly review what's available in comma seperated form. Try now.
+The other one is my favorite. You can quickly review what's available in comma seperated form. Try:
+
+```
+@ .
+```
+
+Which one is better?
 
 ## ChangeLog
 
