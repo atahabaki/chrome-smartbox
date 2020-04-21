@@ -7,7 +7,7 @@
         "scripts": [
             "app.js"
         ],
-        "persistent": false
+        "persistent": true
     },
     "omnibox": {
         "keyword": "@"
