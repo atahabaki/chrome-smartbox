@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
-    "name": "multisearch",
+    "name": "ssearch",
     "version": "3.1",
-    "description": "Multisearch from omnibox. Just type \"@\" then see the magic",
+    "description": "Multi-search engine for omnibox. Just type \"@\" then see the magic",
     "background": {
         "scripts": [
             "app.js"

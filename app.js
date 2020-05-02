@@ -18,7 +18,7 @@ loadSites();
 function createURL(site,query) {
     for (var i = 0; i < sites.length; i++) {
         if ( sites[i].name == site ) {
-            return `${sites[i].url}${query}`
+            return `${sites[i].url.replace("{%query%}",query)}`
         }
     }
 }

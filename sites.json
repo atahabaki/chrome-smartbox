@@ -2,66 +2,66 @@
     {
         "name":"ytb",
         "desc":"YouTube",
-        "url":"https://www.youtube.com/results?search_query="
+        "url":"https://www.youtube.com/results?search_query={%query%}"
     },
     {
         "name":"ggl",
         "desc":"Google",
-        "url":"https://www.google.com/search?q="
+        "url":"https://www.google.com/search?q={%query%}"
     },
     {
         "name":"bng",
         "desc":"Bing",
-        "url":"https://www.bing.com/search?q="
+        "url":"https://www.bing.com/search?q={%query%}"
     },
     {
         "name":"dckgo",
         "desc":"DuckDuckGo",
-        "url":"https://duckduckgo.com/?q="
+        "url":"https://duckduckgo.com/?q={%query%}"
     },
     {
         "name":"sszlk",
         "desc":"SesliSözlük",
-        "url":"https://seslisozluk.net/"
+        "url":"https://seslisozluk.net/{%query%}"
     },
     {
         "name":"yaho",
         "desc":"Yahoo",
-        "url":"https://search.yahoo.com/?q="
+        "url":"https://search.yahoo.com/?q={%query%}"
     },
     {
         "name":"trryn",
         "desc":"Torrent Oyun İndir",
-        "url":"https://www.torrentoyunindir.com/?s="
+        "url":"https://www.torrentoyunindir.com/?s={%query%}"
     },
     {
         "name":"ydex",
         "desc":"Yandex",
-        "url":"https://yandex.com/search/?text="
+        "url":"https://yandex.com/search/?text={%query%}"
     },
     {
         "name":"itebx",
         "desc":"All IT e-Books",
-        "url":"http://allitebooks.org/?s="
+        "url":"http://allitebooks.org/?s={%query%}"
     },
     {
         "name":"iconf",
         "desc":"IconFinder",
-        "url":"https://www.iconfinder.com/search/?q="
+        "url":"https://www.iconfinder.com/search/?q={%query%}"
     },
     {
         "name":"rddt",
         "desc":"Reddit",
-        "url":"https://www.reddit.com/search/?q="
+        "url":"https://www.reddit.com/search/?q={%query%}"
     },
     {
         "name":"trrmfy",
         "desc":"TorrentMafya",
-        "url":"https://www.torrentmafya.net/?s="
+        "url":"https://www.torrentmafya.net/?s={%query%}"
     },
     {
         "name":"gthb",
         "desc":"GitHub",
-        "url":"https://github.com/search?q="
+        "url":"https://github.com/search?q={%query%}"
     }
 ]
