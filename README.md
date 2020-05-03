@@ -26,6 +26,19 @@ Use it well...
 
 ## Usage
 
+### JSON data...
+
+```json
+[
+    {
+        "name": "xmpl", //Unique short-name of search engine...
+        "desc": "example", //Exact name of the search engine...
+        "url": "https://example.com/search/?q={%query%}", //"{%query%}" replaces your query when entered a query on runtime...
+    }
+    //...
+]
+```
+
 ### Searching
 
 Simple to search on whatever you want.
@@ -64,7 +77,7 @@ keyword: is the short-name of the web site.
 There're 2 options you can try to list all of them. The first one is:
 
 ```
-@ ?
+@ .
 ```
 
 You can list just specific amount of them by typing "?".
@@ -72,12 +85,29 @@ You can list just specific amount of them by typing "?".
 The other one is my favorite. You can quickly review what's available in comma seperated form. Try:
 
 ```
-@ .
+@ ...
 ```
 
 Which one is better?
 
+### Importing, Exporting and Adding sites
+
+Importing, easily pasting prepared JSON array of search engines...
+```
+@ <= <json_array>
+```
+
+Exporting, easly while on omnibox. :D
+```
+@ >=
+```
+
+Adding array of search engines, it's now easier. :D
+```
+@ +<= <json_array>
+
 ## ChangeLog
 
-* Listing available search engines is now available.
+* Storing changes locally. (Finally)
+* Importing, Exporting and Adding sites (Experimental, but yes :D)
 * General improvements and fixes.
