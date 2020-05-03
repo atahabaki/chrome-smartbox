@@ -10,6 +10,11 @@
         "url":"https://www.google.com/search?q={%query%}"
     },
     {
+        "name":"dvand",
+        "desc": "Android Devs",
+        "url": "https://developer.android.com/s/results?q={%query%}"
+    },
+    {
         "name":"bng",
         "desc":"Bing",
         "url":"https://www.bing.com/search?q={%query%}"
