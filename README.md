@@ -1,6 +1,6 @@
 # chrome-smartbox
 
-`smartbox v3.0`
+`smartbox v4.1`
 
 Searching would not be much simpler. Just type "@" in URL bar. Then type the search engine you wanna search e.g. 'ytb', 'ggl', 'bng' etc. Then type the search string.
 
@@ -12,17 +12,24 @@ Use it well...
 |--------------|-----------|
 | YouTube      | ytb       |
 | Google       | ggl       |
+| Android Docs | dvand     |
 | Bing         | bng       |
 | DuckDuckGo   | dckgo     |
 | SesliSozluk  | sszlk     |
 | Yahoo        | yaho      |
-| TorrentOyun  | trryn     |
+| Torrent O... | trryn     |
 | Yandex       | ydex      |
-| AllItEBooks  | itebx     |
+| All IT e-b...| itebx     |
 | Iconfinder   | iconf     |
 | Reddit       | rddt      |
 | TorrentMafya | trrmf     |
 | GitHub       | gthb      |
+
+## Screenshot
+
+![Searching on YouTube about chrome-smartbox](images/chrome-smartbox-search-focused.png)
+![Listing all search engines by comma seperated list](images/chrome-smartbox-listing-comma-focused.png)
+![Listing all search engines one by one](images/chrome-smartbox-listing-focused.png)
 
 ## Usage
 

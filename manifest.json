@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
-    "name": "ssearch",
-    "version": "4.0",
-    "description": "Multi-search engine for omnibox. Just type \"@\" then see the magic",
+    "name": "smartbox",
+    "version": "4.1",
+    "description": "Easily search on anywhere you want...",
     "background": {
         "scripts": [
             "app.js"

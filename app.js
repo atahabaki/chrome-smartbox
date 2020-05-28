@@ -227,7 +227,7 @@ chrome.omnibox.onInputChanged.addListener((text, suggest) => {
                     description: ""
                 };
                 if (e.name === site || e.name.includes(site)) {
-                    temp.content = `${e.url}${query}`;
+                    temp.content = `${e.url.replace('{%query%}',query)}`;
                     temp.description = `Search for ${query} on ${e.desc}`;
                     suggestions.push(temp);
                 }
