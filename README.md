@@ -38,11 +38,10 @@ Use it well...
 ```json
 [
     {
-        "name": "xmpl", /*Unique short-name of search engine...*/
-        "desc": "example", /*Exact name of the search engine...*/
-        "url": "https://example.com/search/?q={%query%}", /*"{%query%}" replaces your query when entered a query on runtime...*/
+        "name": "xmpl",
+        "desc": "example",
+        "url": "https://example.com/search/?q={%query%}",
     }
-    /*...*/
 ]
 ```
 
