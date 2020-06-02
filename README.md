@@ -1,3 +1,4 @@
+![SmartBox](images/logo-design.svg)
 # chrome-smartbox
 
 `smartbox v4.1`
