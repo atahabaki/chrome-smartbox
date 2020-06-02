@@ -28,9 +28,9 @@ Use it well...
 
 ## Screenshot
 
-![Searching on YouTube about chrome-smartbox](images/chrome-smartbox-search-focused.png)
-![Listing all search engines by comma seperated list](images/chrome-smartbox-listing-comma-focused.png)
-![Listing all search engines one by one](images/chrome-smartbox-listing-focused.png)
+![Searching on YouTube about chrome-smartbox](media/chrome-smartbox-search-focused.png)
+![Listing all search engines by comma seperated list](media/chrome-smartbox-listing-comma-focused.png)
+![Listing all search engines one by one](media/chrome-smartbox-listing-focused.png)
 
 ## Usage
 
