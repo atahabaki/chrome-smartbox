@@ -1,0 +1,32 @@
+{
+	"appname": {
+		"message": "smartbox: Akıllı Arama"
+	},
+	"appdesc": {
+		"message": "Web tarayıcıları için eşsiz bir arama aracı, istediğiniz yerde, istediğiniz herhangi bir şeyi arayın."
+	},
+	"search": {
+		"message": "%site'de/da \"%query\" ara."
+	},
+	"export_json": {
+		"message": "JSON olarak dışa aktar..."
+	},
+	"list_engines": {
+		"message": "%s'de/da (%n) ara."
+	},
+	"add_more": {
+		"message": "Arama motorlarına ekle."
+	},
+	"add_one": {
+		"message": "Arama motorlarına \"%name (%desc) %url\" ekle."
+	},
+	"import": {
+		"message": "İçe aktar..."
+	},
+	"rmentry": {
+		"message": "%entry'ı/i kaldır..."
+	},
+	"setdef": {
+		"message": "%entry'ı/i varsayılan yap..."
+	}
+}

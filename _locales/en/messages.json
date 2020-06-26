@@ -1,0 +1,42 @@
+{
+	"appname": {
+		"message":"smartbox: Smart Searching",
+		"description":"App Name"
+	},
+	"appdesc": {
+		"message":"An unmatched searching tool for web browsers, search for anything you want, search on anywhere you want.",
+		"description":"Brief explaination of what this extension does"
+	},
+	"search": {
+		"message":"Search on %site for \"%query\".",
+		"description":"Identifies which search engine will be used..."
+	},
+	"export_json":{
+		"message":"Export as JSON",
+		"description":"JSON exporting..."
+	},
+	"list_engines": {
+		"message": "Search on %s (%n).",
+		"description": "Listing short name and full name of available search engines"
+	},
+	"add_more": {
+		"message": "Add them into search engines.",
+		"description": "Listing short name and full name of available search engines"
+	},
+	"add_one": {
+		"message": "Add \"%name (%desc) %url\" into search engines.",
+		"description": "Adding one entry to sites"
+	},
+	"import": {
+		"message": "Import...",
+		"description": "Import all of them"
+	},
+	"rmentry": {
+		"message": "Remove %entry...",
+		"description": "Remove an entry from sites..."
+	},
+	"setdef": {
+		"message": "Set default entry to %entry...",
+		"description": "Change the default entry..."
+	}
+}
