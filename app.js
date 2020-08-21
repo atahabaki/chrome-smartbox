@@ -95,6 +95,12 @@ function navigate(url) {
 	});
 }
 
+function searchOnDefaultEngine(text) {
+	let _url = createURL(default_one.name, text);
+	console.log(_url);
+	navigate(_url);
+}
+
 let add = /^(\+<=)[\s\t\v]*(\[.*\])/;
 let imp = /^(<=)[\s\t\v]*(\[.*\])/;
 let sng_add = /^(\+)([\w\s\d]+)[\s\t\v]+([\w\d\s]+)[\s\t\v]+(.*)/;
@@ -166,13 +172,10 @@ chrome.omnibox.onInputEntered.addListener((text) => {
 				navigate(url);
 				suggest(suggestions);
 			}
-			else {
-				let _url = createURL(default_one.name, text);
-				console.log(_url);
-				navigate(_url);
-			}
+			else searchOnDefaultEngine(text);
 		}
 	}
+	else searchOnDefaultEngine(text);
 });
 
 const getStrChange = (site, query) =>	 chrome.i18n.getMessage("search").replace("%site", site).replace("%query", query);
