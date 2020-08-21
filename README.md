@@ -2,7 +2,7 @@
 
 # smartbox
 
-`smartbox v4.6`
+`smartbox v4.7`
 
 An unmatched searching tool for web browsers, search for
 anything you want, search on anywhere you want.
@@ -129,3 +129,4 @@ Adding array of search engines, it's now easier. :D
 * Storing changes locally. (Finally)
 * Importing, Exporting and Adding sites (Experimental, but yes :D)
 * General improvements and fixes.
+* Search alogrithm improved and fixed some problems...
