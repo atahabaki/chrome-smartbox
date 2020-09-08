@@ -103,7 +103,7 @@ function searchOnDefaultEngine(text) {
 
 let add = /^(\+<=)[\s\t\v]*(\[.*\])/;
 let imp = /^(<=)[\s\t\v]*(\[.*\])/;
-let sng_add = /^(\+)([\w\s\d]+)[\s\t\v]+["']?([\w\d\s]+)["']?[\s\t\v]+(.*)/
+let sng_add = /^(\+)([\w\d]+)[\s\t\v]+["']?([\w\d\s]+)["']?[\s\t\v]+(.*)/
 let sng_rm = /^(\-)([\w\s\d]+)/;
 let def_one = /^(\!)([\w\s\d]+)/;
 let search = /^([\w\d]+)[\s\t\v]+(.*)/;
