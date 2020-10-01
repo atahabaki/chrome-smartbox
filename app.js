@@ -108,72 +108,96 @@ let sng_rm = /^(\-)([\w\s\d]+)/;
 let def_one = /^(\!)([\w\s\d]+)/;
 let search = /^([\w\d]+)[\s\t\v]+(.*)/;
 
+function add_entries(text) {
+	let _res = text.match(add);
+	if ( _res.length == 3 ) {
+		let _sites = JSON.parse(_res[2]);
+		_sites.forEach(e => sites.push(e));
+		save();
+	}
+}
+
+function add_entry(text) {
+	let site = {
+		name: null,
+		desc: null,
+		url: null
+	};
+	let _res = text.match(sng_add);
+	if ( _res.length == 5 ) {
+		site.name = _res[2];
+		site.desc = _res[3];
+		site.url = _res[4];
+		sites.push(site);
+		save();
+	}
+}
+
+function remove_entry(text) {
+	let _res = text.match(sng_rm);
+	if (_res.length == 3) {
+		let site = _res[2];
+		sites = sites.filter(e => e.name != site);
+		save();
+	}
+}
+
+function import_entries(text) {
+	let _res = text.match(imp);
+	if ( _res.length == 3 ) {
+		sites = JSON.parse(_res[2]);
+		save();
+	}
+}
+
+function set_default(text) {
+	let _res = text.match(def_one);
+	if (_res.length == 3) {
+		let site = _res[2];
+		changeDef(site);
+	}
+}
+
+function search(text) {
+	let _res = text.match(search);
+	if (_res.length == 3) {
+		let site = _res[1];
+		let query = _res[2];
+		let url = createURL(site, query);
+		if (url != undefined) {
+			navigate(url);
+			suggest(suggestions);
+		}
+		else searchOnDefaultEngine(text);
+	}
+}
+
 chrome.omnibox.onInputEntered.addListener((text) => {
 	text = text.trim();
 	console.log(sites);
 
 	if (add.test(text)) {
 		console.log(`It is +<=`);
-		let _res = text.match(add);
-		if ( _res.length == 3 ) {
-			let _sites = JSON.parse(_res[2]);
-			_sites.forEach(e => sites.push(e));
-			save();
-		}
+		add_entries(text);
 	}
 	else if (imp.test(text)) {
 		console.log(`It is <=`);
-		let _res = text.match(imp);
-		if ( _res.length == 3 ) {
-			sites = JSON.parse(_res[2]);
-			save();
-		}
+		import_entries(text);
 	}
 	else if (sng_add.test(text)) {
 		console.log(`It is +`);
-		let site = {
-			name: null,
-			desc: null,
-			url: null
-		};
-		let _res = text.match(sng_add);
-		if ( _res.length == 5 ) {
-			site.name = _res[2];
-			site.desc = _res[3];
-			site.url = _res[4];
-			sites.push(site);
-			save();
-		}
+		add_entry();
 	}
 	else if (sng_rm.test(text)) {
 		console.log(`It is -`);
-		let _res = text.match(sng_rm);
-		if (_res.length == 3) {
-			let site = _res[2];
-			sites = sites.filter(e => e.name != site);
-			save();
-		}
+		remove_entry(text);
 	}
 	else if (def_one.test(text)) {
 		console.log(`It is !`);
-		let _res = text.match(def_one);
-		if (_res.length == 3) {
-			let site = _res[2];
-			changeDef(site);
-		}
+		set_default(text);
 	}
 	else if (search.test(text)) {
-		let _res = text.match(search);
-		if (_res.length == 3) {
-			let site = _res[1];
-			let query = _res[2];
-			let url = createURL(site, query);
-			if (url != undefined) {
-				navigate(url);
-				suggest(suggestions);
-			}
-			else searchOnDefaultEngine(text);
-		}
+		search(text);
 	}
 	else searchOnDefaultEngine(text);
 });
