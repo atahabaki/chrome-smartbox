@@ -2,7 +2,7 @@
 
 # smartbox
 
-`smartbox v4.8`
+`smartbox v5.0-pre`
 
 An unmatched searching tool for web browsers, search for
 anything you want, search on anywhere you want.
