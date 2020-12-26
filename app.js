@@ -58,6 +58,12 @@ class BoxManager {
 		else console.log(`We could not find any corresponding Box 4 ${name}!..`);
 	}
 
+	toggle_sync() {
+		console.log(`Current sync: ${this.is_sync_enabled ? 'Sync' : 'Local'}`)
+		this.is_sync_enabled =! this.is_sync_enabled
+		console.log(`Current sync: ${this.is_sync_enabled ? 'Sync' : 'Local'}`)
+	}
+
 	#assign_all(list, default1, is_sync_enabled) {
 		this.list = list;
 		this.default1 = default1;
@@ -144,10 +150,12 @@ class App {
 	/***  RegEx Patterns ***/
 	#add_regex = /^(\+<=)[\s\t\v]*(\[.*\])/;
 	#imp_regex = /^(<=)[\s\t\v]*(\[.*\])/;
+	#exp_regex = /^(=>)/;
 	#single_add_regex = /^(\+)([\w\d]+)[\s\t\v]+["']?([\w\d\s]+)["']?[\s\t\v]+(.*)/;
 	#single_rm_regex = /^(\-)([\w\d]+)/;
 	#default1_regex = /^(\!)([\w\d]+)/;
 	#search_regex = /^([\w\d]+)[\s\t\v]+(.*)/;
+	#toggle_sync_regex = /^\@\!sync$/;
 
 	#first_install() {
 		console.log("First Install");
@@ -206,6 +214,10 @@ class App {
 		}
 	}
 
+	#export_entries() {
+		return this.#boxman.list
+	}
+
 	#set_default1(text) {
 		let _res = text.match(this.#default1_regex);
 		if (_res.length == 3) this.#boxman.change_default1(_res[2]);
@@ -240,6 +252,9 @@ class App {
 		chrome.omnibox.onInputEntered.addListener((text)=>{
 			text=text.trim();
 			console.log(text);
+			if (this.#toggle_sync_regex.test(text)) {
+				this.#boxman.toggle_sync();
+			}
 			if (this.#add_regex.test(text)) {
 				console.log("It's +<=...")
 				this.#add_entries(text);
@@ -247,6 +262,10 @@ class App {
 			else if (this.#imp_regex.test(text)) {
 				console.log("It's <=...")
 				this.#import_entries(text);
+			}
+			else if (this.#exp_regex.test(text)) {
+				console.log("It's =>...")
+				console.log(this.#export_entries());
 			}
 			else if (this.#single_add_regex.test(text)) {
 				console.log("It's +...")
@@ -269,6 +288,17 @@ class App {
 		});
 	}
 
+	#onInputChanged() {
+		chrome.omnibox.onInputChanged.addListener((text, suggest) => {
+			//Search...
+			//remove entry
+			//add entry / single add
+			//toggle sync
+			//change default1
+			//import/export
+		})
+	}
+
 	initialize(sites, default1, is_sync_enabled = false) {
 		this.#boxman = new BoxManager(sites, default1, is_sync_enabled);
 		this.#on_install();
@@ -278,7 +308,7 @@ class App {
 }
 
 //TODO Export Import
-//TODO Toggle Sync
+//TODO Toggle Sync - Writed helper function - now time to implement it. ("!@sync")
 //TODO Change Default Engine
 //TODO List all
 //TODO List some of them
