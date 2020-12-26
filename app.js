@@ -18,9 +18,7 @@ class Box {
 		return _res.length == 2
 	}
 
-	#validate_url(url) {
-		return url.includes("{%query%}");
-	}
+	#validate_url = (url) => url.includes("{%query%}");
 
 	validate(data) {
 		if (is_object(data)) {
@@ -155,7 +153,7 @@ class App {
 	#single_rm_regex = /^(\-)([\w\d]+)/;
 	#default1_regex = /^(\!)([\w\d]+)/;
 	#search_regex = /^([\w\d]+)[\s\t\v]+(.*)/;
-	#toggle_sync_regex = /^\@\!sync$/;
+	#toggle_sync_regex = /^\!\@sync$/;
 
 	#first_install() {
 		console.log("First Install");
