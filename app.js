@@ -286,8 +286,62 @@ class App {
 		});
 	}
 
+	#getStrChange = (site, query) => chrome.i18n.getMessage("search").replace("%site", site).replace("%query", query);
+
+	#rawSuggestionWithPostfix(site,query,postfix) {
+		return {
+			"content": `${site}.${postfix}/${query}`,
+			"description": this.#getStrChange(`${site}.${postfix}`,query)
+		}
+	}
+
+	#rawSuggestions = (site,query) => [
+		{content: `${site}/${query}`, description: this.#getStrChange(site,query)},
+		this.#rawSuggestionWithPostfix(site,query,"com"),
+		this.#rawSuggestionWithPostfix(site,query,"net"),
+		this.#rawSuggestionWithPostfix(site,query,"org")
+	]
+
+	#rawSuggest(text,suggest) {
+		let suggestions = this.#rawSuggestions(text,"")
+		if (text.includes(".")) {
+			suggest(suggestions.slice(0,1))
+		}
+		else suggest(suggestions.slice(1))
+	}
+
 	#onInputChanged() {
 		chrome.omnibox.onInputChanged.addListener((text, suggest) => {
+			text=text.trim();
+			console.log(text)
+			if (this.#toggle_sync_regex.test(text)) {
+				//ToggleSymc suggestion (write the current status or what will it be
+			}
+			else if (this.#single_rm_regex.test(text)) {
+				//Single rm suggestion
+			}
+			else if (this.#single_add_regex.test(text)) {
+				//Single add suggestion
+			}
+			else if (this.#add_regex.test(text)) {
+				//Add suggestion
+			}
+			else if (this.#imp_regex.test(text)) {
+				//Import suggestion
+			}
+			else if (this.#exp_regex.test(text)) {
+				//Export suggestion
+			}
+			else if (this.#default1_regex.test(text)) {
+				//Default1 suggestion
+			}
+			else if (this.#search_regex.test(text)) {
+				//Search suggestion
+			}
+			else {
+				//Suggest search engine
+				//look names,urls,descs
+			}
 			//Search...
 			//remove entry
 			//add entry / single add
@@ -301,6 +355,7 @@ class App {
 		this.#boxman = new BoxManager(sites, default1, is_sync_enabled);
 		this.#on_install();
 		this.#onInputEntered();
+		this.#onInputChanged();
 		this.#boxman.load();
 	}
 }
