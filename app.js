@@ -269,7 +269,9 @@ class App {
 			text=text.trim();
 			console.log(text);
 			if (this.#toggle_sync_regex.test(text)) {
+				console.log("It's !@sync")
 				this.#boxman.toggle_sync();
+				return this.#boxman.save();
 			}
 			if (this.#add_regex.test(text)) {
 				console.log("It's +<=...")
@@ -352,7 +354,7 @@ class App {
 			let toggle_sync_suggestion = {
 				"content": " !@sync",
 				"description": chrome.i18n.getMessage("set_sync").replace("%sync",
-						this.is_sync_enabled ? chrome.i18n.getMessage("sync_on") : chrome.i18n.getMessage("sync_off")),
+						this.#boxman.is_sync_enabled ? chrome.i18n.getMessage("sync_off") : chrome.i18n.getMessage("sync_on")),
 			}
 
 			let toggle_sync_suggest = () => {
@@ -361,7 +363,7 @@ class App {
 
 			if (this.#toggle_sync_regex.test(text)) {
 				//ToggleSymc suggestion (write the current status or what will it be
-				console.log(`Current sync: ${this.is_sync_enabled ? 'Sync' : 'Local'}`)
+				console.log(`Current sync: ${this.#boxman.is_sync_enabled ? 'Sync' : 'Local'}`)
 				toggle_sync_suggest()
 			}
 			else if (this.#single_rm_regex.test(text)) {
