@@ -451,9 +451,7 @@ class App {
 				}
 			}
 			//Search...
-			//remove entry
-			//add entry / single add
-			//toggle sync
+			//add entry
 			//change default1
 			//import/export
 		})
@@ -469,7 +467,6 @@ class App {
 }
 
 //TODO Export Import
-//TODO Toggle Sync - Writed helper function - now time to implement it. ("!@sync")
 //TODO Change Default Engine
 //TODO List all
 //TODO List some of them
