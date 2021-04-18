@@ -361,15 +361,24 @@ class App {
 				chrome.omnibox.setDefaultSuggestion({"description": toggle_sync_suggestion.description})
 			}
 
-			let single_rm_suggestion = (content, entry) => {
+			let single_rm_suggestion = (entry) => {
 				return {
-					"content": content,
 					"description": chrome.i18n.getMessage("rmentry").replace("%entry", entry)
 				}
 			}
 
 			let single_rm_suggest = (content, entry) => {
 				chrome.omnibox.setDefaultSuggestion({"description": single_rm_suggestion(content, entry).description})
+			}
+
+			let single_add_suggestion = (name, desc, url) => {
+				return {
+					"description": chrome.i18n.getMessage("add_one").replace("%name", name).replace("%desc", desc).replace("%url", url)
+				}
+			}
+
+			let single_add_suggest = (name, desc, url) => {
+				chrome.omnibox.setDefaultSuggestion({"description": single_add_suggestion(name, desc, url).description})
 			}
 
 			let is_in_db = (site) => {
@@ -389,7 +398,7 @@ class App {
 			else if (this.#single_rm_regex.test(text)) {
 				//Single rm suggestion
 				let _res = text.match(this.#single_rm_regex);
-				console.log("remove",_res)
+				console.log("sremove",_res)
 				if (_res.length == 3) {
 					let x = is_in_db(_res[2])
 					if (x != false)
@@ -398,6 +407,11 @@ class App {
 			}
 			else if (this.#single_add_regex.test(text)) {
 				//Single add suggestion
+				let _res = text.match(this.#single_add_regex);
+				console.log("sadd",_res)
+				if (_res.length == 5) {
+					single_add_suggest(_res[2], _res[3], _res[4])
+				}
 			}
 			else if (this.#add_regex.test(text)) {
 				//Add suggestion
