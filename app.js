@@ -335,12 +335,19 @@ class App {
 			console.log(text)
 
 			// Sets default suggestion, and suggest RAW suggestions...
-			const default_search_suggestion = () => {
+			const default_suggests = () => {
 				let desc = chrome.i18n.getMessage("search").replace("%site", this.#boxman.default1["desc"]).replace("%query", text.includes(" ") ? `\"${text}\"` : text)
 				chrome.omnibox.setDefaultSuggestion({"description": desc})
 				this.#rawSuggest(text, suggest);
 			}
-			default_search_suggestion()
+			default_suggests()
+
+			let search_suggestion = (content, name, query) => {
+				return {
+					"content": content,
+					"description": chrome.i18n.getMessage("search").replace("%site", name).replace("%query", query.includes(" ") ? `\"${query}\"` : query)
+				}
+			}
 
 			let toggle_sync_suggestion = {
 				"content": " !@sync",
@@ -379,17 +386,25 @@ class App {
 				//Search suggestion
 				let _res = text.match(this.#search_regex)
 				console.log(_res)
+				let filter_res = this.#boxman.filter(_res[1])
+				if (_res.length == 3) {
+					console.log(typeof(filter_res))
+					if (filter_res instanceof Box || filter_res instanceof Object) {
+						let site = _res[1]
+						let query = _res[2]
+						let _url = this.#createURL(site,query);
+						let suggestion = search_suggestion(_url, filter_res["desc"], query)
+						chrome.omnibox.setDefaultSuggestion({"description": suggestion["description"]})
+					}
+				}
 			}
 			else {
 				//Suggest search engine
 				//look names,urls,descs
 				if (text.startsWith("!@s")) {
 					toggle_sync_suggest()
-					suggest([
-						suggestion
-					])
 					if (text != "!@sync")
-						default_search_suggestion()
+						default_suggests()
 				}
 			}
 			//Search...
