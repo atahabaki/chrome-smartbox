@@ -361,6 +361,17 @@ class App {
 				chrome.omnibox.setDefaultSuggestion({"description": toggle_sync_suggestion.description})
 			}
 
+			let single_rm_suggestion = (content, entry) => {
+				return {
+					"content": content,
+					"description": chrome.i18n.getMessage("rmentry").replace("%entry", entry)
+				}
+			}
+
+			let single_rm_suggest = (content, entry) => {
+				chrome.omnibox.setDefaultSuggestion({"description": single_rm_suggestion(content, entry).description})
+			}
+
 			if (this.#toggle_sync_regex.test(text)) {
 				//ToggleSymc suggestion (write the current status or what will it be
 				console.log(`Current sync: ${this.#boxman.is_sync_enabled ? 'Sync' : 'Local'}`)
@@ -368,6 +379,17 @@ class App {
 			}
 			else if (this.#single_rm_regex.test(text)) {
 				//Single rm suggestion
+				let _res = text.match(this.#single_rm_regex);
+				console.log("remove",_res)
+				if (_res.length == 3) {
+					let filter_res = this.#boxman.filter(_res[2])
+					if (_res.length == 3) {
+						console.log(typeof(filter_res))
+						if (filter_res instanceof Box || filter_res instanceof Object) {
+							single_rm_suggest(text, filter_res["desc"])
+						}
+					}
+				}
 			}
 			else if (this.#single_add_regex.test(text)) {
 				//Single add suggestion
