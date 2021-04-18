@@ -335,7 +335,12 @@ class App {
 			console.log(text)
 			if (this.#toggle_sync_regex.test(text)) {
 				//ToggleSymc suggestion (write the current status or what will it be
-
+				console.log(`Current sync: ${this.is_sync_enabled ? 'Sync' : 'Local'}`)
+				let suggestion = {
+					"description": chrome.i18n.getMessage("set_sync").replace("%sync",
+							this.is_sync_enabled ? chrome.i18n.getMessage("sync_on") : chrome.i18n.getMessage("sync_off")),
+				}
+				chrome.omnibox.setDefaultSuggestion(suggestion)
 			}
 			else if (this.#single_rm_regex.test(text)) {
 				//Single rm suggestion
@@ -357,10 +362,14 @@ class App {
 			}
 			else if (this.#search_regex.test(text)) {
 				//Search suggestion
+				let _res = text.match(this.#search_regex)
+				console.log(_res)
 			}
 			else {
 				//Suggest search engine
 				//look names,urls,descs
+				let desc = chrome.i18n.getMessage("search").replace("%site", this.#boxman.default1["desc"]).replace("%query", text.includes(" ") ? `\"${text}\"` : text)
+				chrome.omnibox.setDefaultSuggestion({"description": desc})
 				this.#rawSuggest(text, suggest);
 			}
 			//Search...
