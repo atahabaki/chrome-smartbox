@@ -152,7 +152,7 @@ class App {
 	#single_add_regex = /^(\+)([\w\d]+)[\s\t\v]+["']?([\w\d\s]+)["']?[\s\t\v]+(.*)/;
 	#single_rm_regex = /^(\-)([\w\d]+)/;
 	#default1_regex = /^(\!)([\w\d]+)/;
-	#search_regex = /^([\w\d]+)[\s\t\v]+(.*)/;
+	#search_regex = /^([\w\.\d]+)[\s\t\v]+(.*)/;
 	#toggle_sync_regex = /^\!\@sync$/;
 
 	#first_install() {
@@ -227,6 +227,24 @@ class App {
 		});
 	}
 
+	#splitIntoParts(text) {
+		let _res = text.match(this.#search_regex)
+		if (_res != null) {
+			if (_res.length  == 3) {
+				let site = _res[1]
+				let query = _res[2]
+				return {
+					"site": site,
+					"query": query,
+				}
+			}
+		}
+		else return {
+			"site": text,
+			"query": "",
+		}
+	}
+
 	#search(text) {
 		let _res = text.match(this.#search_regex)
 		let filter_res = this.#boxman.filter(_res[1])
@@ -286,7 +304,7 @@ class App {
 		});
 	}
 
-	#getStrChange = (site, query) => chrome.i18n.getMessage("search").replace("%site", site).replace("%query", query);
+	#getStrChange = (site, query) => chrome.i18n.getMessage("search").replace("%site", site).replace("%query", query.includes(" ") ? `\"${query}\"` : query);
 
 	#rawSuggestionWithPostfix(site,query,postfix) {
 		return {
@@ -303,7 +321,8 @@ class App {
 	]
 
 	#rawSuggest(text,suggest) {
-		let suggestions = this.#rawSuggestions(text,"")
+		let _res = this.#splitIntoParts(text)
+		let suggestions = this.#rawSuggestions(_res.site,_res.query)
 		if (text.includes(".")) {
 			suggest(suggestions.slice(0,1))
 		}
@@ -316,6 +335,7 @@ class App {
 			console.log(text)
 			if (this.#toggle_sync_regex.test(text)) {
 				//ToggleSymc suggestion (write the current status or what will it be
+
 			}
 			else if (this.#single_rm_regex.test(text)) {
 				//Single rm suggestion
@@ -341,6 +361,7 @@ class App {
 			else {
 				//Suggest search engine
 				//look names,urls,descs
+				this.#rawSuggest(text, suggest);
 			}
 			//Search...
 			//remove entry
