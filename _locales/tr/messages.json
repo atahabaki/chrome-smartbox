@@ -28,5 +28,17 @@
 	},
 	"setdef": {
 		"message": "%entry'ı/i varsayılan yap..."
+	},
+	"sync_off": {
+		"message":"Yerel senkronizasyon",
+		"description": "Local sync mode..."
+	},
+	"sync_on":{
+		"message": "Hesaba yedekleme",
+		"description": "account sync mode..."
+	},
+	"set_sync": {
+		"message": "%sync moduna geçin...",
+		"description": "Switch sync chain..."
 	}
 }

@@ -38,5 +38,17 @@
 	"setdef": {
 		"message": "Set default entry to %entry...",
 		"description": "Change the default entry..."
+	},
+	"sync_off":{
+		"message":"local sync",
+		"description": "Local sync mode..."
+	},
+	"sync_on": {
+		"message":"Account sync",
+		"description": "account sync mode..."
+	},
+	"set_sync": {
+		"message": "Switch to %sync mode...",
+		"description": "Switch sync chain..."
 	}
 }
