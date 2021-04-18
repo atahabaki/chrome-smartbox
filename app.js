@@ -333,14 +333,29 @@ class App {
 		chrome.omnibox.onInputChanged.addListener((text, suggest) => {
 			text=text.trim();
 			console.log(text)
+
+			// Sets default suggestion, and suggest RAW suggestions...
+			const default_search_suggestion = () => {
+				let desc = chrome.i18n.getMessage("search").replace("%site", this.#boxman.default1["desc"]).replace("%query", text.includes(" ") ? `\"${text}\"` : text)
+				chrome.omnibox.setDefaultSuggestion({"description": desc})
+				this.#rawSuggest(text, suggest);
+			}
+			default_search_suggestion()
+
+			let toggle_sync_suggestion = {
+				"content": " !@sync",
+				"description": chrome.i18n.getMessage("set_sync").replace("%sync",
+						this.is_sync_enabled ? chrome.i18n.getMessage("sync_on") : chrome.i18n.getMessage("sync_off")),
+			}
+
+			let toggle_sync_suggest = () => {
+				chrome.omnibox.setDefaultSuggestion({"description": toggle_sync_suggestion.description})
+			}
+
 			if (this.#toggle_sync_regex.test(text)) {
 				//ToggleSymc suggestion (write the current status or what will it be
 				console.log(`Current sync: ${this.is_sync_enabled ? 'Sync' : 'Local'}`)
-				let suggestion = {
-					"description": chrome.i18n.getMessage("set_sync").replace("%sync",
-							this.is_sync_enabled ? chrome.i18n.getMessage("sync_on") : chrome.i18n.getMessage("sync_off")),
-				}
-				chrome.omnibox.setDefaultSuggestion(suggestion)
+				toggle_sync_suggest()
 			}
 			else if (this.#single_rm_regex.test(text)) {
 				//Single rm suggestion
@@ -368,9 +383,14 @@ class App {
 			else {
 				//Suggest search engine
 				//look names,urls,descs
-				let desc = chrome.i18n.getMessage("search").replace("%site", this.#boxman.default1["desc"]).replace("%query", text.includes(" ") ? `\"${text}\"` : text)
-				chrome.omnibox.setDefaultSuggestion({"description": desc})
-				this.#rawSuggest(text, suggest);
+				if (text.startsWith("!@s")) {
+					toggle_sync_suggest()
+					suggest([
+						suggestion
+					])
+					if (text != "!@sync")
+						default_search_suggestion()
+				}
 			}
 			//Search...
 			//remove entry
