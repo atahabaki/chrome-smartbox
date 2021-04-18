@@ -8,7 +8,7 @@
 		"description":"Brief explaination of what this extension does"
 	},
 	"search": {
-		"message":"Search on %site for \"%query\".",
+		"message":"Search on %site for %query.",
 		"description":"Identifies which search engine will be used..."
 	},
 	"export_json":{

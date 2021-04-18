@@ -6,7 +6,7 @@
 		"message": "Web tarayıcıları için eşsiz bir arama aracı, istediğiniz yerde, istediğiniz herhangi bir şeyi arayın."
 	},
 	"search": {
-		"message": "%site'de/da \"%query\" ara."
+		"message": "%site'de/da %query ara."
 	},
 	"export_json": {
 		"message": "JSON olarak dışa aktar..."
