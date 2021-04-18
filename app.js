@@ -372,6 +372,15 @@ class App {
 				chrome.omnibox.setDefaultSuggestion({"description": single_rm_suggestion(content, entry).description})
 			}
 
+			let is_in_db = (site) => {
+				let filter_res = this.#boxman.filter(site)
+				console.log(typeof(filter_res))
+				if (filter_res instanceof Box || filter_res instanceof Object) {
+					return filter_res;
+				}
+				return false
+			}
+
 			if (this.#toggle_sync_regex.test(text)) {
 				//ToggleSymc suggestion (write the current status or what will it be
 				console.log(`Current sync: ${this.#boxman.is_sync_enabled ? 'Sync' : 'Local'}`)
@@ -382,13 +391,9 @@ class App {
 				let _res = text.match(this.#single_rm_regex);
 				console.log("remove",_res)
 				if (_res.length == 3) {
-					let filter_res = this.#boxman.filter(_res[2])
-					if (_res.length == 3) {
-						console.log(typeof(filter_res))
-						if (filter_res instanceof Box || filter_res instanceof Object) {
-							single_rm_suggest(text, filter_res["desc"])
-						}
-					}
+					let x = is_in_db(_res[2])
+					if (x != false)
+						single_rm_suggest(text, x["desc"])
 				}
 			}
 			else if (this.#single_add_regex.test(text)) {
@@ -410,10 +415,10 @@ class App {
 				//Search suggestion
 				let _res = text.match(this.#search_regex)
 				console.log(_res)
-				let filter_res = this.#boxman.filter(_res[1])
 				if (_res.length == 3) {
+					let filter_res = is_in_db(_res[1])
 					console.log(typeof(filter_res))
-					if (filter_res instanceof Box || filter_res instanceof Object) {
+					if (filter_res != false) {
 						let site = _res[1]
 						let query = _res[2]
 						let _url = this.#createURL(site,query);
