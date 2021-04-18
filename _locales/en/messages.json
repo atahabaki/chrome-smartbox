@@ -44,7 +44,7 @@
 		"description": "Local sync mode..."
 	},
 	"sync_on": {
-		"message":"Account sync",
+		"message":"account sync",
 		"description": "account sync mode..."
 	},
 	"set_sync": {
