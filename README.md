@@ -4,6 +4,9 @@
 
 `smartbox v5.0-pre`
 
+This repo is now discontinued. Please, take a look at [Smart Search](https://github.com/atahabaki/smart-search).
+
+
 An unmatched searching tool for web browsers, search for
 anything you want, search on anywhere you want.
 
