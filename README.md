@@ -4,7 +4,13 @@
 
 `smartbox v5.0-pre`
 
-This repo is now discontinued. Please, take a look at [Smart Search](https://github.com/atahabaki/smart-search).
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
+__Important Update: This repository has been discontinued.__
+We recommend using [Quickie](https://github.com/atahabaki/quickie) as an alternative.
+
+Thank you for your understanding and cooperation!
+If you have any further questions or need assistance, feel free to ask.
 
 
 An unmatched searching tool for web browsers, search for
